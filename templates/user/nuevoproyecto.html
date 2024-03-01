@@ -88,11 +88,11 @@
                         {% csrf_token %}
                         <fieldset>
                             <label for="project-name">Nombre del Proyecto</label>
-                            <input type="text" id="project-name" name="project-name" placeholder="Nombre del Proyecto (Requerido)" required>
+                            <input value="{{project.name}}" type="text" id="project-name" name="project-name" placeholder="Nombre del Proyecto (Requerido)" required>
                         </fieldset>
                         <fieldset>
                             <label  for="project-description">Descripción del Proyecto</label>
-                            <textarea id="project-description" name="project-description" placeholder="Descripción del Proyecto (Requerido)" required></textarea>
+                            <textarea  value="{{project.description}}"  id="project-description" name="project-description" placeholder="Descripción del Proyecto (Requerido)" required></textarea>
                         </fieldset>
                         <fieldset>
                             <label for="project-creation-date">Fecha de Creación</label>
@@ -101,19 +101,19 @@
                         <fieldset>
                             <label for="project-start-date-planned">Fecha de Inicio Planeada</label>
                             <input type="date" id="project-start-date-planned" name="project-start-date-planned">
-                        </fieldset>
+                        </fieldset> 
                         <fieldset>
                             <label for="project-start-date-real">Fecha de Inicio Real</label>
                             <input type="date" id="project-start-date-real" name="project-start-date-real">
-                        </fieldset>
+                        <!-- </fieldset> -->
                         <fieldset>
                             <label for="project-end-date-planned">Fecha de Finalización Planeada</label>
                             <input type="date" id="project-end-date-planned" name="project-end-date-planned">
-                        </fieldset>
-                        <fieldset>
+                        </fieldset> 
+                        <!-- <fieldset>
                             <label for="project-end-date-real">Fecha de Finalización Real</label>
                             <input type="date" id="project-end-date-real" name="project-end-date-real">
-                        </fieldset>
+                        </fieldset> -->
                         <fieldset>
                             <label  for="project-scope">Alcance</label>
                             <textarea id="project-scope" name="project-scope"></textarea>
@@ -126,10 +126,10 @@
                                 <option value="cerrado">Cerrado</option>
                             </select>
                         </fieldset>
-                        <fieldset>
+                        <!-- <fieldset>
                             <label for="project-completion-percentage">Porcentaje Completado</label>
                             <input type="number" id="project-completion-percentage" name="project-completion-percentage" min="0" max="100">
-                        </fieldset>
+                        </fieldset> -->
 
                         <fieldset>
                             <label for="project-type">Tipo</label>
@@ -143,7 +143,7 @@
 
                         <fieldset>
                             <label for="project-leader">Líder</label>
-                            <input type="text" id="project-leader" name="project-leader">
+                            <input value="{{ project.usuario.first_name }} {{ project.usuario.last_name }}" type="text" id="project-leader" name="project-leader">
                         </fieldset>
 
                         <fieldset>
@@ -185,7 +185,7 @@
                         <div ng-include="'projects/create/import-project-form-common/actions.html'">
                             <div class="create-project-action">
                                 <button variant="secondary" type="button" title="Volver"  class="btn-small create-project-action-cancel">Volver</button>
-                                <button type="submit" class="btn-small create-project-action-submit ">Crear Proyecto</button>
+                                <button type="submit" class="btn-small create-project-action-submit" title="Cargar" >Crear Proyecto</button>
                             </div>
                         </div>
                     </form>

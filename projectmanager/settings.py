@@ -130,3 +130,14 @@ STATICFILES_DIRS = [
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+## correo electronico 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.office365.com'  # Servidor SMTP de Outlook
+EMAIL_PORT = 587  # Puerto SMTP de Outlook (generalmente 587)
+EMAIL_USE_TLS = True  # Usar TLS para la conexión segura
+EMAIL_HOST_USER = 'notificaciones_colvacor@colvatel.com.co'  # Tu dirección de correo electrónico de Outlook
+EMAIL_HOST_PASSWORD = 'Berdugo13_'  # Tu contraseña de correo electrónico de Outlook
+

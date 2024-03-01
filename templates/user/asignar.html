@@ -84,7 +84,8 @@
                     </div>
                     <h3 class="create-project-description">Administra tus proyectos de forma ágil y eficiente con nuestro gestor de proyectos personalizado. Mantén un flujo constante en tus tareas independientes y optimiza la colaboración en equipo</h3>
                     
-                    <form name="projectForm" ng-submit="vm.submit()" novalidate="novalidate" class="ng-pristine ng-invalid ng-invalid-required">
+                    <form name="projectForm"  class="ng-pristine ng-invalid ng-invalid-required" method="POST" >
+                        {% csrf_token %}
                         <div ng-include="'projects/create/import-project-form-common/name.html'">
                             <fieldset>
                                 <label for="project-name">Nombre del Proyecto</label>

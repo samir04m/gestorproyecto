@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from markupfield.fields import MarkupField
+from django.contrib.auth import models as authmodels
+
 
 class Usuario(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -49,9 +52,7 @@ class Proyecto(models.Model):
         ('desarollo', 'Proyectos Producto Propio'),
         ('cerrado', 'Cerrado'),
     )
-    
-    # Proyectos Integración , Necesidades entrega operación , 	Proyectos Producto Propio , 	Necesidades 
-    
+        
     name = models.CharField(max_length=100) 
     codigo = models.CharField(max_length=100) ## auto increment - automatico 
     description = models.TextField() 
@@ -69,15 +70,17 @@ class Proyecto(models.Model):
     tipo = models.CharField(max_length=50 , choices = TYPE ) ##  proyecto o necesidad 
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE) 
     lider = models.CharField(max_length=100) ## automatico 
-    grupo = models.ManyToManyField('Grupo', related_name='proyectos') ## grupo asociado lista desplegable - brayan 
+    grupo = models.ManyToManyField('Grupo', related_name='proyectos', blank=False) ## grupo asociado lista desplegable - brayan 
     
     categoria = models.CharField(max_length=100 , choices = CATEGORIA) # desplegable  lista desplegable - brayan 
     antecedentes = models.TextField() ### 
     fase = models.CharField(max_length=100 ,choices = FASES) ### lista , brayan los tiene 
-    programas = models.ManyToManyField('Programa', related_name='proyectos') # lista falta llegar 
+    programas = models.ManyToManyField('Programa', related_name='proyectos', blank=False ) # lista falta llegar 
     comentarios = models.TextField(null=True, blank=True) ## 
     spi = models.FloatField(default=0) ## indicador 
     es = models.FloatField(default=0) ## formualdo 
+    
+    columna = models.BooleanField(default=False) ##  asignado 
 
 
 #! falta 
@@ -86,16 +89,9 @@ class Grupo(models.Model):
     asociados = models.TextField()
     cluster = models.TextField()
     
-
-
-
-
 #! no lo tenemos 
 class Programa(models.Model):
     nombre = models.CharField(max_length=100)
-
-
-
 
 
 class Hito(models.Model):
@@ -209,3 +205,54 @@ class Costos(models.Model):
     recurrente = models.TextField()
     meses = models.CharField(max_length = 100)
     proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
+    
+    
+
+
+## prueba 
+
+class Tablero(models.Model):
+    titulo = models.CharField(max_length=200)
+    proyect =  models.ForeignKey(Proyecto, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.titulo
+
+    def nueva_columna(self, titulo):
+        c = Columna(titulo=titulo, tablero=self)
+        c.save()
+        return c
+
+class Columna(models.Model):
+    titulo = models.CharField(max_length=200)
+    tablero = models.ForeignKey(Tablero, related_name='columnas', on_delete=models.CASCADE)  
+
+    def __str__(self):
+        return "%s - %s" % (self.titulo, self.tablero)
+
+    def nueva_tarjeta(self, titulo, descripcion):
+        t = Tarjeta(titulo=titulo, descripcion=descripcion, columna=self)
+        t.save()
+        return t
+
+class Postit(models.Model):
+    titulo = models.CharField(max_length=200)
+    columna = models.ForeignKey(Columna, related_name='tarjetas', on_delete=models.CASCADE)  
+    autor = models.ForeignKey(authmodels.User, on_delete=models.CASCADE)
+    fecha = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.titulo
+
+class Tarjeta(Postit):
+    descripcion = MarkupField()
+    participantes = models.ManyToManyField(authmodels.User)
+
+    def __str__(self):
+        return self.titulo
+
+class Recurso(models.Model):
+    nombre = models.CharField(max_length=200)
+    archivo = models.FileField(upload_to='recursos')
+    tarjeta = models.ForeignKey(Tarjeta, on_delete=models.CASCADE)
+
