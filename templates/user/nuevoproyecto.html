@@ -79,20 +79,20 @@
                                 <use xlink:href="#icon-kanban" href="#icon-kanban"></use>
                             </svg>
                         </tg-svg>
-                        <h1 translate="PROJECT.CREATE.TEMPLATE_KANBAN" class="create-project-title">Proyecto</h1>
+                        <h1 class="create-project-title">Proyecto</h1>
                     </div>
                     <h3   class="create-project-description">Administra tus proyectos de forma ágil y eficiente con nuestro gestor de proyectos personalizado. Mantén un flujo constante en tus tareas independientes y optimiza la colaboración en equipo</h3>
                     
                     
-                    <form name="projectForm" ng-submit="vm.submit()" novalidate="novalidate" class="ng-pristine ng-invalid ng-invalid-required">
+                    <form name="projectForm"  novalidate="novalidate" class="ng-pristine ng-invalid ng-invalid-required" method="post">
                         {% csrf_token %}
                         <fieldset>
                             <label for="project-name">Nombre del Proyecto</label>
-                            <input value="{{project.name}}" type="text" id="project-name" name="project-name" placeholder="Nombre del Proyecto (Requerido)" required>
+                            <input value="{{context.name}}" type="text" id="project-name" name="project-name" placeholder="Nombre del Proyecto (Requerido)" required readonly >
                         </fieldset>
                         <fieldset>
                             <label  for="project-description">Descripción del Proyecto</label>
-                            <textarea  value="{{project.description}}"  id="project-description" name="project-description" placeholder="Descripción del Proyecto (Requerido)" required></textarea>
+                            <textarea   id="project-description" name="project-description" placeholder="Descripción del Proyecto (Requerido)" required> {{ context.descr }} </textarea>
                         </fieldset>
                         <fieldset>
                             <label for="project-creation-date">Fecha de Creación</label>
@@ -102,10 +102,11 @@
                             <label for="project-start-date-planned">Fecha de Inicio Planeada</label>
                             <input type="date" id="project-start-date-planned" name="project-start-date-planned">
                         </fieldset> 
-                        <fieldset>
+                        <!-- <fieldset>
                             <label for="project-start-date-real">Fecha de Inicio Real</label>
                             <input type="date" id="project-start-date-real" name="project-start-date-real">
-                        <!-- </fieldset> -->
+                        </fieldset>  -->
+
                         <fieldset>
                             <label for="project-end-date-planned">Fecha de Finalización Planeada</label>
                             <input type="date" id="project-end-date-planned" name="project-end-date-planned">

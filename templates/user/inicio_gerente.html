@@ -248,21 +248,25 @@
                   <!--  desde aqui  proyectos  -->
                   {% for proyecto in  proyectos %}
                     <div class="contCard">
-                      <div class="imagen">
-                        <i class="fas fa-check-double"></i>
-                      </div>
-                      <div class="textos">
-                        <h3>{{proyecto.name}}</h3>
-                        <div class="estadotarea">
-                          <span class="tarea">Estado:</span>
-                          <p class="estado">{{proyecto.estado}}</p>
+                        <div class="imagen">
+                          <i class="fas fa-check-double"></i>
                         </div>
-                        <div class="contAsig">
-                          <p class="datenumText">Asignación</p>
-                          <a  href="" class="asg">Ingrese aqui</a>
+
+                        <div class="textos">
+                          <h3>{{proyecto.name}}</h3>
+
+                          <div class="estadotarea">
+                            <span class="tarea">Estado:</span>
+                            <p class="estado">{{proyecto.estado}}</p>
+                          </div>
+
+                          <div class="contAsig">
+                            <p class="datenumText">Asignación</p>
+                            <a  href="{% url 'project' id_proyect=proyecto.id %}" class="asg">Ingrese aqui</a>
+                          </div>
+
                         </div>
                       </div>
-                  </div>
                 
                       {% endfor %}
 

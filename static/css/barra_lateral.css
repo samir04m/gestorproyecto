@@ -42,7 +42,7 @@ body{
     height: 60px;
     color: aqua;
 }
-
+ 
 .top-menu .logo{
     align-items: center;
     display: flex;
@@ -58,7 +58,7 @@ body{
     display: none;
     font-size: 12px;
     margin-left: 20px;
-    right: 5px;
+    padding-right: 10px;
 }
 
 .bx-line-chart{
@@ -73,13 +73,13 @@ hr{
 
 .linea1{
     position: absolute;
-    top: 360px;
+    top: 380px;
     width: 100%;
 }
 
 .linea2{
     position: absolute;
-    bottom: 100px;
+    bottom: 70px;
     width: 100%;
 }
 
@@ -136,6 +136,8 @@ hr{
     margin: 0px;
     width: 200px;
     padding-top: 8px;
+    color: white;
+    opacity: 1;
 }
 
 .menu .enlace:hover {
@@ -144,6 +146,8 @@ hr{
     transition: left 0.5s ease;
     width: 200px;
     margin: 0px;
+    color: white;
+    opacity: 100%;
 }
 
 .menu .enlace i {
@@ -155,11 +159,17 @@ hr{
 
 .menu-dashboard.open .menu .enlace span{
     display: block;
+    opacity: 1;
 }
 
 .menu .enlace span {
-    display: none;
+    margin-left: 15px;
+    opacity: 0;
     transition: opacity .3s ease;
+}
+
+.menu .enlace:hover span {
+    opacity: 1;
 }
 
 .menu-dashboard.open {
@@ -174,7 +184,6 @@ hr{
     text-decoration: none;
     align-items: center;
     display: flex;
-    justify-content: center;
     margin: 4px;
 }
 
@@ -195,6 +204,12 @@ hr{
     position: absolute;
     bottom: 60px;
     right: 12px;
+    cursor: pointer;
+}
+
+.bx-chevrons-left:hover{
+    color: white;
+    opacity: 100%;
 }
 
 .rotated {
@@ -219,7 +234,8 @@ hr{
 
 /*Contenedor principal*/
 .contdatos{
-    background-color: aqua;
+    background-color: white;
     margin-top: 48px;
     grid-area: 1 / 2 / 12 / 14;   
 }
+
